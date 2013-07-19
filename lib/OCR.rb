@@ -1,5 +1,4 @@
 # encoding: utf-8
-#!/usr/bin/env ruby
 
 require 'tesseract'
 require 'RMagick'
@@ -26,7 +25,7 @@ class OCR
   def initialize(file)
     @ocr = Tesseract::Engine.new do |e|
       e.language  = :eng
-      e.blacklist = '\'"|,.:;/?<>!@\\$%^&*()[]{}`~‘¥§-_=+'
+      e.blacklist = '\'"|,.:;/?<>!@\\$%^&*()[]{}`~‘¥§-_=+£1234567890’'
     end
 
     @original  = Image.read(file)[0]
@@ -52,7 +51,7 @@ class OCR
     contrast
   end
 
-  def get_hashtag()
+  def get_hashtag
     t,b,l,r = find_line_pair(get_line_data)
 
     cropped = @original.crop(l, t, r-l, b-t)
